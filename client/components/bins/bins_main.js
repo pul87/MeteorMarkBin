@@ -4,6 +4,7 @@ import { Bins } from "../../../imports/collections/bins";
 
 import BinsEditor from "./bins_editor";
 import BinsViewer from "./bins_viewer";
+import BinsShare from "./bins_share";
 
 class BinsMain extends Component {
     render() {
@@ -15,6 +16,7 @@ class BinsMain extends Component {
             <div className="bins-main">
                 <BinsEditor bin={this.props.bin}/>
                 <BinsViewer bin={this.props.bin}/>
+                <BinsShare bin={this.props.bin}/>
             </div>
         );
     }
@@ -22,6 +24,7 @@ class BinsMain extends Component {
 
 export default createContainer((props) => {
     Meteor.subscribe("bins");
+    Meteor.subscribe("sharedBins");
     const bin = Bins.findOne(props.params.binId);
     return { bin };
 }, BinsMain);
